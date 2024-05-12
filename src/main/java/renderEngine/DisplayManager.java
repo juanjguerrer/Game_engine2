@@ -18,10 +18,10 @@ public class DisplayManager {
 	private static final int HEIGHT = 720;
     private static long window;
     private static final String TITLE = "Our first window!";
-    public static void createDisplay(){
+    public static void createDisplay(float RED, float GREEN, float BLUE){
         System.out.println("Hello LWJGL " + Version.getVersion() + "!");
         init();
-        loop();
+        loop(RED, GREEN, BLUE);
     }
 
     private static void init() {
@@ -65,10 +65,10 @@ public class DisplayManager {
         glfwShowWindow(window);
     }
 
-    private static void loop() {
+    private static void loop(float RED, float GREEN, float BLUE) {
         GL.createCapabilities();
 
-        glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+        glClearColor(RED, GREEN, BLUE, 1.0f);
 
         while (!glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
