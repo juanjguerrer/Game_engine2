@@ -2,7 +2,9 @@ package com.gameEngine;
 
 import java.util.Random;
 
+import core.EngineManager;
 import core.WindowManager;
+import core.utils.Consts;
 
 public class Launcher { 
     private static final float RED_255 = 71;
@@ -12,19 +14,24 @@ public class Launcher {
     private static final float GREEN = GREEN_255 / 255;
     private static final float BLUE = BLUE_255 / 255;
 
+    private static WindowManager window;
+    private static EngineManager engine;
     //Loader loader = new Loader();
     //Renderer renderer = new Renderer(RED, GREEN, BLUE);
 
     public static void main(String[] args) {
-        WindowManager windowManager = new WindowManager("Our first window2!", 1280, 720, false);
-        windowManager.init();
-        windowManager.setClearColor(RED, GREEN, BLUE, 1);
-        
-        Random random = new Random();
-        while(!windowManager.windowShouldClose()) {
-            windowManager.update();
-        }
+        window = new WindowManager(Consts.TITLE, 1280, 720, false);
+        engine = new EngineManager();
+        //window.setClearColor(RED, GREEN, BLUE, 1);
 
-        windowManager.cleanUp();
+        try {
+            engine.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static WindowManager getWindow() {
+        return window;
     }
 }
